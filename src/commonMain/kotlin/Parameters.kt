@@ -1,0 +1,1 @@
+interface Parameters : Storage<JsonTypedValue<*>>
