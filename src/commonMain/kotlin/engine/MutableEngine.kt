@@ -2,10 +2,10 @@ package engine
 
 import criterion.TypedCriterion
 import operator.TypedOperator
-import rule.TypedRule
+import rule.Rule
 
 interface MutableEngine : Engine {
-    fun <T> addRule(rule: TypedRule<T>): EngineBuilder
+    fun <T> addRule(rule: Rule): EngineBuilder
     // fun <T> updateRule(rule: TypedRule<T>): EngineBuilder
     // fun <T> removeRule(rule: TypedRule<T>): EngineBuilder
 
