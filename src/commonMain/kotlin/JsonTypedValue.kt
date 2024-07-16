@@ -1,1 +1,0 @@
-sealed interface JsonTypedValue<T> : TypedValue<T>

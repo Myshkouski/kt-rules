@@ -1,9 +1,9 @@
 package test
 
-import operator.LessOperator
-import operator.LessOrEqualOperator
-import operator.GreaterOperator
-import operator.GreaterOrEqualOperator
+import io.github.myshkouski.kotlin.operator.GreaterOperator
+import io.github.myshkouski.kotlin.operator.GreaterOrEqualOperator
+import io.github.myshkouski.kotlin.operator.LessOperator
+import io.github.myshkouski.kotlin.operator.LessOrEqualOperator
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
