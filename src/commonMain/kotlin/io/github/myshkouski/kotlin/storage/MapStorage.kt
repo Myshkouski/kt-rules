@@ -1,4 +1,4 @@
-package io.github.myshkouski.kotlin
+package io.github.myshkouski.kotlin.storage
 
 internal class MapStorage<T> : Storage<T> {
     private val map = mutableMapOf<String, T>()

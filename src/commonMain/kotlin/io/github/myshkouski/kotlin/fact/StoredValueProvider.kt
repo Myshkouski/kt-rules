@@ -1,7 +1,7 @@
 package io.github.myshkouski.kotlin.fact
 
 import io.github.myshkouski.kotlin.Optional
-import io.github.myshkouski.kotlin.Storage
+import io.github.myshkouski.kotlin.storage.Storage
 import io.github.myshkouski.kotlin.empty
 
 internal class StoredValueProvider<out T>(

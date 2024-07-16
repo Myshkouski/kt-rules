@@ -1,5 +1,11 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package io.github.myshkouski.kotlin
 
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+
+@JsExport
 interface Optional<T> {
     val isPresent: Boolean
     val value: T
@@ -24,21 +30,22 @@ private class DefaultOptional<T>(
             return optionalField as T
         }
         private set(value: T) {
-            synchronized(this) {
-                isPresent = true
-                optionalField = value
-            }
+            isPresent = true
+            optionalField = value
         }
 }
 
+@JsExport
 fun <T> Optional.Companion.of(value: T): Optional<out T> {
     return DefaultOptional(true, value)
 }
 
+@JsExport
 fun <T> Optional.Companion.ofNullable(value: T?): Optional<out T?> {
     return DefaultOptional(true, value)
 }
 
+@JsExport
 fun <T> Optional.Companion.empty(): Optional<out T> {
     return DefaultOptional(false, null)
 }

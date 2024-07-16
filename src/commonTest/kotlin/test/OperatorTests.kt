@@ -28,7 +28,7 @@ class OperatorTests {
     }
 
     @Test
-    fun `less or equal`() {
+    fun lessOrEqual() {
         val operator = LessOrEqualOperator<Number, Int>()
         val testCases = arrayOf(
             10 to 10 to true,
@@ -47,7 +47,7 @@ class OperatorTests {
     }
 
     @Test
-    fun more() {
+    fun greater() {
         val operator = GreaterOperator<Number, Int>()
         val testCases = arrayOf(
             10 to 10 to false,
@@ -66,7 +66,7 @@ class OperatorTests {
     }
 
     @Test
-    fun `more or equal`() {
+    fun greaterOrEqual() {
         val operator = GreaterOrEqualOperator<Number, Int>()
         val testCases = arrayOf(
             10 to 10 to true,

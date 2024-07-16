@@ -1,6 +1,6 @@
 package io.github.myshkouski.kotlin.rule
 
-import io.github.myshkouski.kotlin.Storage
+import io.github.myshkouski.kotlin.storage.Storage
 import io.github.myshkouski.kotlin.condition.Condition
 import io.github.myshkouski.kotlin.criterion.TypedCriterion
 import io.github.myshkouski.kotlin.fact.Fact

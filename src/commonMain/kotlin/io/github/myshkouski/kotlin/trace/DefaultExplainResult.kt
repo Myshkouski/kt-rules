@@ -1,6 +1,6 @@
 package io.github.myshkouski.kotlin.trace
 
-import io.github.myshkouski.kotlin.Storage
+import io.github.myshkouski.kotlin.storage.Storage
 import io.github.myshkouski.kotlin.fact.Fact
 import io.github.myshkouski.kotlin.rule.TypedRule
 

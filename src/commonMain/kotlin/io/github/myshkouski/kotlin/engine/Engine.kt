@@ -1,12 +1,12 @@
 package io.github.myshkouski.kotlin.engine
 
 import io.github.myshkouski.kotlin.Parameters
-import io.github.myshkouski.kotlin.Storage
 import io.github.myshkouski.kotlin.fact.Fact
 import io.github.myshkouski.kotlin.operator.Operator
+import io.github.myshkouski.kotlin.storage.Storage
 
 interface Engine {
-    suspend fun run(facts: Storage<Fact>): Parameters
+    suspend fun run(facts: Storage<out Fact>): Parameters
 }
 
 interface EvaluationContext {
@@ -22,7 +22,7 @@ class DefaultEvaluationContext(
 class DefaultEngine(
     private val context: EngineProperties
 ) : Engine {
-    override suspend fun run(facts: Storage<Fact>): Parameters {
+    override suspend fun run(facts: Storage<out Fact>): Parameters {
         val parameters: Parameters = Storage()
 
         context.rules.toList().find {

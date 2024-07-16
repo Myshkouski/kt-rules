@@ -1,10 +1,15 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package io.github.myshkouski.kotlin.engine
 
 import io.github.myshkouski.kotlin.Builder
-import io.github.myshkouski.kotlin.criterion.TypedCriterion
-import io.github.myshkouski.kotlin.operator.TypedOperator
+import io.github.myshkouski.kotlin.operator.Operator
 import io.github.myshkouski.kotlin.rule.Rule
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+import kotlin.js.JsName
 
+@JsExport
 interface EngineBuilder: MutableEngineOperations, Builder<Engine>
 
 class DefaultEngineBuilder: EngineBuilder {
@@ -15,12 +20,9 @@ class DefaultEngineBuilder: EngineBuilder {
         return this
     }
 
-    override fun <T> setCondition(name: String, condition: TypedCriterion<T>): EngineBuilder {
-        TODO("Not yet implemented")
-    }
-
-    override fun <T, U> addOperator(name: String, operator: TypedOperator<T, U>): EngineBuilder {
-        TODO("Not yet implemented")
+    override fun addOperator(name: String, operator: Operator): EngineBuilder {
+        engineProperties.operators.set(name, operator)
+        return this
     }
 
     override fun build(): Engine {
@@ -28,6 +30,8 @@ class DefaultEngineBuilder: EngineBuilder {
     }
 }
 
+@JsExport
+@JsName("createEnginBuilder")
 fun EngineBuilder(): EngineBuilder {
     return DefaultEngineBuilder()
 }

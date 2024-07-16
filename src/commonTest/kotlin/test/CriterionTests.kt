@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 
 class CriterionTests {
     @Test
-    fun `boolean criterion`() = runTest {
+    fun booleanCriterion() = runTest {
         val condition = DefaultTypedCriterion(
             operator = ReferentialEqualOperator<Boolean, Boolean>(),
             value = true,
@@ -21,7 +21,7 @@ class CriterionTests {
     }
 
     @Test
-    fun `number criterion`() = runTest {
+    fun numberCriterion() = runTest {
         val condition = DefaultTypedCriterion(
             operator = LessOperator<Number, Number>(),
             value = 2000,
