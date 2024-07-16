@@ -23,11 +23,9 @@ class DefaultEngine(
     private val context: EngineProperties
 ) : Engine {
     override suspend fun run(facts: Storage<Fact>): Parameters {
-        val rules = context.rules
-
         val parameters: Parameters = Storage()
 
-        rules.first {
+        context.rules.toList().find {
             !it.evaluate(facts, null)
         }
 
