@@ -14,14 +14,23 @@ import kotlin.test.assertNotNull
 
 class EngineTests {
     @Test
-    fun test() = runTest {
+    fun engineBuilder() = runTest {
         val engineBuilder = EngineBuilder()
+
         engineBuilder.addRule(
             TypedRule(
                 fact = "user.id",
                 criterion = DefaultTypedCriterion(
                     operator = EqualOperator<Number, Number>(),
                     value = 1,
+                ),
+            )
+        ).addRule(
+            TypedRule(
+                fact = "user.role",
+                criterion = DefaultTypedCriterion(
+                    operator = ContainsOperator(),
+                    value = "admin",
                 ),
             )
         ).addRule(

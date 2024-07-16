@@ -1,13 +1,13 @@
 package io.github.myshkouski.kotlin.rule
 
-import io.github.myshkouski.kotlin.storage.Storage
 import io.github.myshkouski.kotlin.condition.Condition
 import io.github.myshkouski.kotlin.criterion.TypedCriterion
-import io.github.myshkouski.kotlin.fact.Fact
-import io.github.myshkouski.kotlin.fact.StoredValueProvider
 import io.github.myshkouski.kotlin.fact.ValueProvider
+import io.github.myshkouski.kotlin.storage.Storage
 import io.github.myshkouski.kotlin.trace.EvaluationTrace
 import io.github.myshkouski.kotlin.trace.push
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 interface TypedRule<T> {
     suspend fun <U> evaluate(facts: Storage<out ValueProvider<U>>, trace: EvaluationTrace?): Boolean
@@ -39,7 +39,7 @@ fun <T> TypedRule(fact: String, criterion: TypedCriterion<T>): TypedRule<T> {
     )
 }
 
-fun <T> TypedRule(fact: String, facts: Storage<Fact>, condition: (provider: ValueProvider<T>) -> Condition<T>): TypedRule<T> {
-    val provider = StoredValueProvider<T>(fact, facts)
-    return DefaultRule(fact, condition(provider))
-}
+// fun <T> TypedRule(fact: String, facts: Storage<Fact>, condition: (provider: ValueProvider<T>) -> Condition<T>): TypedRule<T> {
+//     val provider = StoredValueProvider<T>(fact, facts)
+//     return DefaultRule(fact, condition(provider))
+// }

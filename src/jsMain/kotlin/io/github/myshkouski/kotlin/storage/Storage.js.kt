@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package io.github.myshkouski.kotlin.storage
 
 import js.array.JsTuple2
@@ -25,7 +27,6 @@ private class JsMapStorage<T> : Storage<T> {
     override fun entries(): Array<out Pair<String, T>> {
         val iterator = map.entries()
         val array: Array<JsTuple2<String, T>> = iterator.asDynamic().toArray().unsafeCast<Array<JsTuple2<String, T>>>()
-        // val array: ReadonlyArray<JsTuple2<String, T>> = iterator.toArray()
         return Array(array.size) {
             val (key, value) = array[it]
             key to value
@@ -37,6 +38,13 @@ private class JsMapStorage<T> : Storage<T> {
     }
 }
 
-private fun <T, U> JsTuple2<T, U>.toPair(): Pair<T, U> {
-    return component1() to component2()
+@JsExport
+fun <T> Storage(vararg pairs: JsTuple2<String, T>): Storage<T> {
+    val storage = Storage<T>()
+
+    for ((key, value) in pairs) {
+        storage.set(key, value)
+    }
+
+    return storage
 }

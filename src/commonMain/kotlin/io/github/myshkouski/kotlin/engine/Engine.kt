@@ -3,23 +3,17 @@ package io.github.myshkouski.kotlin.engine
 import io.github.myshkouski.kotlin.Parameters
 import io.github.myshkouski.kotlin.fact.Fact
 import io.github.myshkouski.kotlin.operator.Operator
+import io.github.myshkouski.kotlin.rule.Rule
 import io.github.myshkouski.kotlin.storage.Storage
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+import kotlin.js.JsName
 
 interface Engine {
     suspend fun run(facts: Storage<out Fact>): Parameters
 }
 
-interface EvaluationContext {
-    val facts: Storage<Fact>
-    val operators: Storage<Operator>
-}
-
-class DefaultEvaluationContext(
-    override val facts: Storage<Fact>,
-    override val operators: Storage<Operator>,
-): EvaluationContext
-
-class DefaultEngine(
+internal class DefaultEngine(
     private val context: EngineProperties
 ) : Engine {
     override suspend fun run(facts: Storage<out Fact>): Parameters {
@@ -31,4 +25,11 @@ class DefaultEngine(
 
         return parameters
     }
+}
+
+@OptIn(ExperimentalJsExport::class)
+@JsExport.Ignore
+@JsName("createEngine")
+fun Engine(): Engine {
+    return DefaultEngine(context = DefaultEngineProperties())
 }

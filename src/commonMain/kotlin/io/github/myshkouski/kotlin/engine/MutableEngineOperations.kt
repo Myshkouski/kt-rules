@@ -1,6 +1,6 @@
 package io.github.myshkouski.kotlin.engine
 
-import io.github.myshkouski.kotlin.operator.Operator
+import io.github.myshkouski.kotlin.operator.TypedOperator
 import io.github.myshkouski.kotlin.rule.Rule
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
@@ -15,6 +15,6 @@ interface MutableEngineOperations {
     // fun <T> setCondition(name: String, condition: TypedCriterion<T>): EngineBuilder
     // fun removeCondition(name: String): EngineBuilder
 
-    fun addOperator(name: String, operator: Operator): EngineBuilder
+    fun addOperator(name: String, operator: TypedOperator<Any?, Any?>): EngineBuilder
     // fun removeOperator(operator: TypedOperator<*, *>): EngineBuilder
 }

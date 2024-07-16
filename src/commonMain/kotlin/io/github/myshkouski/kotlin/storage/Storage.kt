@@ -1,13 +1,7 @@
-@file:OptIn(ExperimentalJsExport::class)
-
 package io.github.myshkouski.kotlin.storage
 
 import io.github.myshkouski.kotlin.fact.ValueProvider
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
-@JsExport
 interface Storage<T> {
     fun get(key: String): T?
     fun set(key: String, value: T)
@@ -21,8 +15,7 @@ internal expect fun <T> emptyStorage(): Storage<T>
 fun <T> Storage(): Storage<T> {
     return emptyStorage()
 }
-@JsExport
-@JsName("createStorage")
+
 fun <T> Storage(vararg pairs: Pair<String, T>): Storage<T> {
     val storage = Storage<T>()
 

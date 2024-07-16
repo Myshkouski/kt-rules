@@ -4,6 +4,7 @@ package io.github.myshkouski.kotlin.engine
 
 import io.github.myshkouski.kotlin.Builder
 import io.github.myshkouski.kotlin.operator.Operator
+import io.github.myshkouski.kotlin.operator.TypedOperator
 import io.github.myshkouski.kotlin.rule.Rule
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
@@ -20,7 +21,7 @@ class DefaultEngineBuilder: EngineBuilder {
         return this
     }
 
-    override fun addOperator(name: String, operator: Operator): EngineBuilder {
+    override fun addOperator(name: String, operator: TypedOperator<Any?, Any?>): EngineBuilder {
         engineProperties.operators.set(name, operator)
         return this
     }
