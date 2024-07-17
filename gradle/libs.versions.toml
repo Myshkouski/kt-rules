@@ -1,0 +1,9 @@
+[versions]
+kotlinx_coroutines = "1.9.0-RC"
+kotlin_wrappers_typescript = "5.4.5-pre.774"
+
+[libraries]
+
+kotlinx_coroutines_core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx_coroutines" }
+kotlinx_coroutines_test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx_coroutines" }
+kotlin_wrappers_typescript = { group = "org.jetbrains.kotlin-wrappers", name = "kotlin-typescript", version.ref = "kotlin_wrappers_typescript" }

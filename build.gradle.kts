@@ -1,8 +1,9 @@
 plugins {
     kotlin("multiplatform") version "2.0.0"
+    `maven-publish`
 }
 
-group = "dev.myshkouski"
+group = "io.github.myshkouski"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -45,18 +46,14 @@ kotlin {
 
     sourceSets {
         jsMain.dependencies {
-            implementation(kotlinw("typescript", "5.4.5-pre.774"))
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0-RC")
+            implementation(libs.kotlin.wrappers.typescript)
+            implementation(libs.kotlinx.coroutines.core)
         }
 
         commonTest.dependencies {
             implementation(kotlin("test"))
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0-RC")
+            implementation(libs.kotlinx.coroutines.test)
             implementation(kotlin("reflect"))
         }
     }
-}
-
-private fun kotlinw(target: String, version: String): String {
-    return "org.jetbrains.kotlin-wrappers:kotlin-$target:$version"
 }
