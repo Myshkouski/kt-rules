@@ -2,8 +2,7 @@ package io.github.myshkouski.kotlin.engine
 
 import io.github.myshkouski.kotlin.Parameters
 import io.github.myshkouski.kotlin.fact.Fact
-import io.github.myshkouski.kotlin.operator.Operator
-import io.github.myshkouski.kotlin.rule.Rule
+import io.github.myshkouski.kotlin.rule.RuleContext
 import io.github.myshkouski.kotlin.storage.Storage
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
@@ -19,8 +18,10 @@ internal class DefaultEngine(
     override suspend fun run(facts: Storage<out Fact>): Parameters {
         val parameters: Parameters = Storage()
 
+        val ruleContext = RuleContext(facts, context.operators, trace = null)
+
         context.rules.toList().find {
-            !it.evaluate(facts, null)
+            !it.evaluate(ruleContext)
         }
 
         return parameters

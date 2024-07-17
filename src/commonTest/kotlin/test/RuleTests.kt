@@ -2,12 +2,13 @@ package test
 
 import io.github.myshkouski.kotlin.condition.MatchAllRules
 import io.github.myshkouski.kotlin.condition.MatchAnyRules
-import io.github.myshkouski.kotlin.criterion.TypedCriterion
+import io.github.myshkouski.kotlin.criterion.Criterion
 import io.github.myshkouski.kotlin.fact.Fact
 import io.github.myshkouski.kotlin.operator.ContainsOperator
-import io.github.myshkouski.kotlin.operator.EqualOperator
-import io.github.myshkouski.kotlin.operator.TypedOperator
-import io.github.myshkouski.kotlin.rule.TypedRule
+import io.github.myshkouski.kotlin.operator.EqualsOperator
+import io.github.myshkouski.kotlin.operator.Operator
+import io.github.myshkouski.kotlin.rule.Rule
+import io.github.myshkouski.kotlin.rule.RuleContext
 import io.github.myshkouski.kotlin.storage.Storage
 import io.github.myshkouski.kotlin.storage.set
 import io.github.myshkouski.kotlin.trace.LoggerTrace
@@ -25,22 +26,22 @@ class RuleTests {
 
     @Test
     fun matchAnyRules() = runTest {
-        val operators: Storage<TypedOperator<*, Any?>> = Storage()
-        operators.set("equals", EqualOperator<Any?, Any?>())
+        val operators: Storage<Operator> = Storage()
+        operators.set("equals", EqualsOperator())
         operators.set("contains", ContainsOperator())
 
         val rule = MatchAnyRules(
-            TypedRule(
+            Rule(
                 fact = "user.id",
-                criterion = TypedCriterion(
-                    operator = operators.get("equals")!!,
+                criterion = Criterion(
+                    operator = "equals",
                     value = 1,
                 ),
             ),
-            TypedRule(
+            Rule(
                 fact = "user.role",
-                criterion = TypedCriterion(
-                    operator = operators.get("contains")!!,
+                criterion = Criterion(
+                    operator = "contains",
                     value = "admin",
                 ),
             ),
@@ -53,30 +54,32 @@ class RuleTests {
             userFacts(2, "subscriber") to false,
         )
 
+        val trace = LoggerTrace()
+
         testCases.forEach { (facts, expected) ->
-            val actual = rule.evaluate(facts, LoggerTrace())
+            val actual = rule.evaluate(RuleContext(facts, operators, trace))
             assertEquals(expected, actual)
         }
     }
 
     @Test
     fun matchAllRules() = runTest {
-        val operators: Storage<TypedOperator<*, Any?>> = Storage()
-        operators.set("equals", EqualOperator<Any?, Any?>())
+        val operators: Storage<Operator> = Storage()
+        operators.set("equals", EqualsOperator())
         operators.set("contains", ContainsOperator())
 
         val rule = MatchAllRules(
-            TypedRule(
+            Rule(
                 fact = "user.id",
-                criterion = TypedCriterion(
-                    operator = operators.get("equals")!!,
+                criterion = Criterion(
+                    operator = "equals",
                     value = 1,
                 ),
             ),
-            TypedRule(
+            Rule(
                 fact = "user.role",
-                criterion = TypedCriterion(
-                    operator = operators.get("contains")!!,
+                criterion = Criterion(
+                    operator = "contains",
                     value = "admin",
                 ),
             ),
@@ -89,8 +92,10 @@ class RuleTests {
             userFacts(2, "subscriber") to false,
         )
 
+        val trace = LoggerTrace()
+
         testCases.forEach { (facts, expected) ->
-            val actual = rule.evaluate(facts, LoggerTrace())
+            val actual = rule.evaluate(RuleContext(facts, operators, trace))
             assertEquals(expected, actual)
         }
     }

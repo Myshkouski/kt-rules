@@ -6,4 +6,4 @@ class StructuralEqualOperator<in T, in U> : TypedOperator<T, U> {
     }
 }
 
-typealias EqualOperator<T, U> = StructuralEqualOperator<T, U>
+typealias EqualsOperator<T, U> = StructuralEqualOperator<T, U>

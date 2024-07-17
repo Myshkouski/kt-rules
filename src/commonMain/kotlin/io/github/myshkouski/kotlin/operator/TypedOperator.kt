@@ -19,4 +19,4 @@ class TypesafeOperator<T, U>(
     }
 }
 
-typealias Operator = TypedOperator<*, Any?>
+typealias Operator = TypedOperator<Any?, Any?>

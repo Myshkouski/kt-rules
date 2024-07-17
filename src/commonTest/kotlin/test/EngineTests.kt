@@ -1,11 +1,13 @@
 package test
 
-import io.github.myshkouski.kotlin.criterion.DefaultTypedCriterion
+import io.github.myshkouski.kotlin.condition.MatchAllRules
+import io.github.myshkouski.kotlin.criterion.Criterion
 import io.github.myshkouski.kotlin.engine.EngineBuilder
 import io.github.myshkouski.kotlin.fact.Fact
 import io.github.myshkouski.kotlin.operator.ContainsOperator
-import io.github.myshkouski.kotlin.operator.EqualOperator
-import io.github.myshkouski.kotlin.rule.TypedRule
+import io.github.myshkouski.kotlin.operator.EqualsOperator
+import io.github.myshkouski.kotlin.operator.InOperator
+import io.github.myshkouski.kotlin.rule.Rule
 import io.github.myshkouski.kotlin.storage.Storage
 import io.github.myshkouski.kotlin.storage.set
 import kotlinx.coroutines.test.runTest
@@ -17,28 +19,39 @@ class EngineTests {
     fun engineBuilder() = runTest {
         val engineBuilder = EngineBuilder()
 
-        engineBuilder.addRule(
-            TypedRule(
-                fact = "user.id",
-                criterion = DefaultTypedCriterion(
-                    operator = EqualOperator<Number, Number>(),
-                    value = 1,
+        engineBuilder.addOperator(
+            name = "equals",
+            operator = EqualsOperator(),
+        ).addOperator(
+            name = "in",
+            operator = InOperator(),
+        ).addOperator(
+            name = "contains",
+            operator = ContainsOperator(),
+        ).addRule(
+            MatchAllRules(
+                Rule(
+                    fact = "user.id",
+                    criterion = Criterion(
+                        operator = "equals",
+                        value = 1,
+                    ),
+                )
+            )
+        ).addRule(
+            Rule(
+                fact = "user.group",
+                criterion = Criterion(
+                    operator = "in",
+                    value = arrayOf("security", "admin"),
                 ),
             )
         ).addRule(
-            TypedRule(
+            Rule(
                 fact = "user.role",
-                criterion = DefaultTypedCriterion(
-                    operator = ContainsOperator(),
-                    value = "admin",
-                ),
-            )
-        ).addRule(
-            TypedRule(
-                fact = "user.role",
-                criterion = DefaultTypedCriterion(
-                    operator = ContainsOperator(),
-                    value = "admin",
+                criterion = Criterion(
+                    operator = "contains",
+                    value = "api-management",
                 ),
             )
         )
@@ -48,7 +61,8 @@ class EngineTests {
 
         val facts: Storage<Fact> = Storage()
         facts.set("user.id", 1)
-        facts.set("user.role", arrayOf("admin"))
+        facts.set("user.group", "admin")
+        facts.set("user.role", arrayOf("api-management"))
 
         engine.run(facts)
     }
