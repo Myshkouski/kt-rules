@@ -19,16 +19,16 @@ class EngineTests {
     fun engineBuilder() = runTest {
         val engineBuilder = EngineBuilder()
 
-        engineBuilder.addOperator(
+        engineBuilder.setOperator(
             name = "equals",
             operator = EqualsOperator(),
-        ).addOperator(
+        ).setOperator(
             name = "in",
             operator = InOperator(),
-        ).addOperator(
+        ).setOperator(
             name = "contains",
             operator = ContainsOperator(),
-        ).addRule(
+        ).setRule(
             MatchAllRules(
                 Rule(
                     fact = "user.id",
@@ -38,7 +38,7 @@ class EngineTests {
                     ),
                 )
             )
-        ).addRule(
+        ).setRule(
             Rule(
                 fact = "user.group",
                 criterion = Criterion(
@@ -46,7 +46,7 @@ class EngineTests {
                     value = arrayOf("security", "admin"),
                 ),
             )
-        ).addRule(
+        ).setRule(
             Rule(
                 fact = "user.role",
                 criterion = Criterion(

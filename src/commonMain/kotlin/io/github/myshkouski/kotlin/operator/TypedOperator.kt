@@ -1,7 +1,12 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package io.github.myshkouski.kotlin.operator
 
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 import kotlin.reflect.KClass
 
+@JsExport
 fun interface TypedOperator<in T, in U> {
     fun match(value: T, operatorValue: U): Boolean
 }
