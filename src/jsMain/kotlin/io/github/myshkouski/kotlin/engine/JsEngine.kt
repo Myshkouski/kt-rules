@@ -3,7 +3,6 @@
 package io.github.myshkouski.kotlin.engine
 
 import io.github.myshkouski.kotlin.Optional
-import io.github.myshkouski.kotlin.Parameters
 import io.github.myshkouski.kotlin.fact.ValueProvider
 import io.github.myshkouski.kotlin.storage.Storage
 import js.promise.Promise
@@ -16,7 +15,7 @@ import kotlinx.coroutines.GlobalScope
 interface JsEngine : Engine {
     @OptIn(DelicateCoroutinesApi::class)
     @JsName("run")
-    fun jsRun(facts: Storage<out JsValueProvider<*>>): Promise<Parameters> {
+    fun jsRun(facts: Storage<out JsValueProvider<*>>): Promise<Storage<Boolean>> {
         return GlobalScope.promise {
            run(facts)
         }

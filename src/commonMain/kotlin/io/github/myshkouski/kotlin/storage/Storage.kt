@@ -1,7 +1,9 @@
 package io.github.myshkouski.kotlin.storage
 
 import io.github.myshkouski.kotlin.fact.ValueProvider
+import kotlin.js.JsExport
 
+@JsExport
 interface Storage<T> {
     fun get(key: String): T?
     fun set(key: String, value: T)

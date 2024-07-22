@@ -29,6 +29,7 @@ class EngineTests {
             name = "contains",
             operator = ContainsOperator(),
         ).setRule(
+            "Check user ID",
             MatchAllRules(
                 Rule(
                     fact = "user.id",
@@ -39,6 +40,7 @@ class EngineTests {
                 )
             )
         ).setRule(
+            "Check user groups",
             Rule(
                 fact = "user.group",
                 criterion = Criterion(
@@ -47,6 +49,7 @@ class EngineTests {
                 ),
             )
         ).setRule(
+            "Check user roles",
             Rule(
                 fact = "user.role",
                 criterion = Criterion(

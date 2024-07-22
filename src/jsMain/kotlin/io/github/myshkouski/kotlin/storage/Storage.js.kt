@@ -39,6 +39,7 @@ private class JsMapStorage<T> : Storage<T> {
 }
 
 @JsExport
+@JsName("createStorage")
 fun <T> Storage(vararg pairs: JsTuple2<String, T>): Storage<T> {
     val storage = Storage<T>()
 
