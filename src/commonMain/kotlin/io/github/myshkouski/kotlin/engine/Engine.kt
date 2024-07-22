@@ -1,5 +1,6 @@
 package io.github.myshkouski.kotlin.engine
 
+import io.github.myshkouski.kotlin.error.RuleEvaluationError
 import io.github.myshkouski.kotlin.fact.Fact
 import io.github.myshkouski.kotlin.rule.RuleContext
 import io.github.myshkouski.kotlin.storage.Storage
@@ -23,7 +24,7 @@ internal class DefaultEngine(
             val result = try {
                 rule.evaluate(ruleContext)
             } catch (e: Throwable) {
-                false
+                throw RuleEvaluationError(name, e)
             }
 
             results.set(name, result)

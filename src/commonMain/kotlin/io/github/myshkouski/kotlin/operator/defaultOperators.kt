@@ -12,8 +12,8 @@ internal val defaultOperators = Storage(
     "contains" to ContainsOperator(),
     "notContains" to ContainsOperator().inverse(),
 
-    // "less" to LessOperator(),
-    // "lessOrEqual" to LessOrEqualOperator(),
-    // "greater" to GreaterOperator(),
-    // "greaterOrEqual" to GreaterOrEqualOperator(),
+    "less" to TypedLessOperator<Number, Number>().unsafeCastToGeneric(),
+    "lessOrEqual" to TypedLessOrEqualOperator<Number, Number>().unsafeCastToGeneric(),
+    "greater" to TypedGreaterOperator<Number, Number>().unsafeCastToGeneric(),
+    "greaterOrEqual" to TypedGreaterOrEqualOperator<Number, Number>().unsafeCastToGeneric(),
 )

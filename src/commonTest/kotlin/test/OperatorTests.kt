@@ -1,16 +1,16 @@
 package test
 
-import io.github.myshkouski.kotlin.operator.GreaterOperator
-import io.github.myshkouski.kotlin.operator.GreaterOrEqualOperator
-import io.github.myshkouski.kotlin.operator.LessOperator
-import io.github.myshkouski.kotlin.operator.LessOrEqualOperator
+import io.github.myshkouski.kotlin.operator.TypedGreaterOperator
+import io.github.myshkouski.kotlin.operator.TypedGreaterOrEqualOperator
+import io.github.myshkouski.kotlin.operator.TypedLessOperator
+import io.github.myshkouski.kotlin.operator.TypedLessOrEqualOperator
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class OperatorTests {
     @Test
     fun less() {
-        val operator = LessOperator<Number, Int>()
+        val operator = TypedLessOperator<Number, Int>()
         val testCases = arrayOf(
             10 to 10 to false,
             10.0 to 10 to false,
@@ -29,7 +29,7 @@ class OperatorTests {
 
     @Test
     fun lessOrEqual() {
-        val operator = LessOrEqualOperator<Number, Int>()
+        val operator = TypedLessOrEqualOperator<Number, Int>()
         val testCases = arrayOf(
             10 to 10 to true,
             10.0 to 10 to true,
@@ -48,7 +48,7 @@ class OperatorTests {
 
     @Test
     fun greater() {
-        val operator = GreaterOperator<Number, Int>()
+        val operator = TypedGreaterOperator<Number, Int>()
         val testCases = arrayOf(
             10 to 10 to false,
             10.0 to 10 to false,
@@ -67,7 +67,7 @@ class OperatorTests {
 
     @Test
     fun greaterOrEqual() {
-        val operator = GreaterOrEqualOperator<Number, Int>()
+        val operator = TypedGreaterOrEqualOperator<Number, Int>()
         val testCases = arrayOf(
             10 to 10 to true,
             10.0 to 10 to true,
